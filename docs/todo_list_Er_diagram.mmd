@@ -1,0 +1,25 @@
+---
+id: 8ae7003e-b055-4893-9362-ed9b532e832e
+title: "ToDoList ER Diagram"
+---
+erDiagram
+    Board {
+        string name
+    }
+    User {
+        string name
+        string email
+    }
+    Task {
+        string title
+        string description
+        date dueDate
+        boolean completed
+        int priority
+        User assignedTo
+    }
+    User ||--o{ Task : crates
+    Board ||--o{ Task : contains
+    User }|--o{ Board : are_in
+
+    
