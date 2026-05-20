@@ -1,0 +1,65 @@
+---
+title: "ToDoList Flow Chart TD"
+---
+flowchart TD
+    %%---------------------------------------
+    %% 1. Init and Authentication
+    %%---------------------------------------
+    A[Start: Access Portal] --> B{Token is Valid?}
+    B -- Yes --> G[Redirect to dashboard]
+    B -- No --> C[Login page]
+    C --> D(Insert user and email)
+    D --> E{Are logins correct?}
+    E -- No --> F[Show error message and stay on login page]
+    F --> D
+    E -- Yes --> G[Generate Login Token and redirect to dashboard]
+
+    G --> AA{View Board or Create new Board or create new ToDo item?}
+
+    %%---------------------------------------
+    %% 2. Dashboard and ToDo List Management
+    %%---------------------------------------
+    
+    Q --> H[Display Boards]
+    H --> J{Select a Board or Create new Board}
+    R --> K[Display ToDo items for selected Board]
+    K --> L[View ToDo details]
+    L--> M(Option to Edit or Delete ToDo item)
+    
+
+    J -- Create new Board --> W(Fill in Board details)
+
+    AA -- Create new ToDo item --> I(Create new ToDo item)
+    I --> N(Fill in ToDo details, board it belongs to)
+    O --> H[ Board view]
+
+    %%---------------------------------------
+    %% 3. Request to Backend
+    %%---------------------------------------
+    AA--View Boards --> Q[Request Boards from backend]
+    J -- Select Board --> R[Request ToDo items for selected Board from backend]
+    M --> S{Edit, Add, Delete or Cancel?}
+    S -- Add --> AC[Submit new ToDo item to backend]
+    AC --> V
+    S -- Edit --> T[Submit info for editing to backend]
+    S -- Delete --> U[Request ToDo item deletion to backend]
+    S -- Cancel --> H
+    T --> V[Receive response from backend and update UI]
+    U --> V
+    V --> K
+
+    N --> O(Submit ToDo item to backend)
+    
+    W --> X[Submit new Board to backend]
+    X --> H
+
+    AA -- Create new Board --> AB(Fill Board details and submit to backend)
+    AB --> Q
+
+    %%---------------------------------------
+    %% 4. Logout
+    %%---------------------------------------
+    H --> Y[Logout]
+    Y --> Z[Clear token and redirect to login page]
+    Z --> C
+
