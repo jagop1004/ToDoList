@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ToDoListBackend.Functionality;
 
 namespace ToDoListBackend.Controllers
 {
@@ -7,9 +8,16 @@ namespace ToDoListBackend.Controllers
     public class TaskController : ControllerBase
     {
         [HttpGet(Name = "GetTasks")]
-        public IEnumerable<string> Get()
+        public IActionResult Get(int? id)
         {
-            return new string[] { "Task 1", "Task 2", "Task 3" };
+            if(id == null)
+                return Ok(TaskManagment.GetTask());
+            else return Ok(TaskManagment.GetTask((int)id));
+        }
+        [HttpGet("all", Name = "GetAllTasks")]
+        public IActionResult GetAll()
+        {
+            return Ok(TaskManagment.GetAllTasks());
         }
 
         [HttpPost(Name = "PostTask")]
