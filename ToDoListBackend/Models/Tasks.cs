@@ -1,26 +1,30 @@
 ﻿using Microsoft.VisualBasic;
 
-namespace ToDoListBackend.DataStructures
+namespace ToDoListBackend.Models
 {
-    public class Task
+    public class Tasks: IDataStructure
     {
+        public int Id { get; set; }
+        public Boards Board { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }
         public ToDoListStatus Status { get; set; }
-        public User AssignedTo { get; set; }
+        public int AssignedTo { get; set; }
 
-        public Task() 
+
+        public Tasks() 
         {
             Title = "title";
             Description = "description";
             DueDate = new DateTime();
             IsCompleted = false;
             Status = ToDoListStatus.NotStarted;
-            AssignedTo = new User();
+            AssignedTo = 0;
         }
-        public Task(string title, string description, DateTime dueDate, User assignedTo)
+        public Tasks(string title, string description, DateTime dueDate, int assignedTo)
         {
             Title = title;
             Description = description;

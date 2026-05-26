@@ -1,0 +1,23 @@
+services:
+  backend_api:
+    build: ./ToDoListBackend
+    container_name: to_do_list_api
+    ports:
+      - "8080:8080"
+    environment:
+      - name=value
+    depends_on:
+      - database_sql
+  database_sql:
+    build: ./DatabaseSql
+    container_name: sql_db_dev
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: mi_password_secreta123
+    ports:
+      - "1433:1433"
+    volumes:
+      # 1. Persistencia de datos:
+      - db_data_dev:/var/opt/mssql
+volumes:
+  db_data_dev:

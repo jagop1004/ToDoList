@@ -1,0 +1,14 @@
+services:
+  db_dev:
+    build: ./
+    container_name: sql_db_dev
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: mi_password_secreta123
+    ports:
+      - "1433:1433"
+    volumes:
+      # 1. Persistencia de datos:
+      - db_data_dev:/var/opt/mssql
+volumes:
+  db_data_dev:
