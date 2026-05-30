@@ -9,13 +9,13 @@ namespace ToDoListBackend.Repositories
         {
             this.db = db;
         }
-        public override IEnumerable<Users> GetAll()
+        public override IEnumerable<User> GetAll()
         {
             return db.Users.ToList();
         }
-        public override Users GetById(int id)
+        public override User GetById(int id)
         {
-            return new Users();
+            return new User();
         }
         public override bool WriteById(int id)
         {

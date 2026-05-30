@@ -6,9 +6,9 @@ namespace ToDoListBackend.Functionality
     {
         private readonly DbContextOptions _sqlConnection;
 
-        public DbSet<Models.Boards> Boards { get; set; }
-        public DbSet<Models.Tasks> Tasks { get; set; }
-        public DbSet<Models.Users> Users { get; set; }
+        public DbSet<Models.Board> Boards { get; set; }
+        public DbSet<Models.Task> Tasks { get; set; }
+        public DbSet<Models.User> Users { get; set; }
 
         public DatabaseManagment(DbContextOptions<DatabaseManagment> options) :base(options)
         {

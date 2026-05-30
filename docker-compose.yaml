@@ -5,11 +5,20 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - name=value
+      - DB_SERVER=database_sql
+      - DB_PORT=1433
+      - DB_DATABASE=todolistDB
+      - DB_PASSWORD=mi_password_secreta123
     depends_on:
       - database_sql
+    networks:
+      - todo_network
+
   database_sql:
-    build: ./DatabaseSql
+    #custom image running sql scripts
+    #build: ./DatabaseSql
+    #original image from ms
+    image: mcr.microsoft.com/mssql/server:latest
     container_name: sql_db_dev
     environment:
       ACCEPT_EULA: Y
@@ -19,5 +28,11 @@ services:
     volumes:
       # 1. Persistencia de datos:
       - db_data_dev:/var/opt/mssql
+    networks:
+      - todo_network
+
 volumes:
   db_data_dev:
+networks:
+  todo_network:
+

@@ -7,7 +7,6 @@ namespace ToDoListBackend.Functionality
     {
         private readonly DatabaseManagment _databaseConnection;
         private UserRepository _userRepository;
-        
 
         public ToDoManagment(DatabaseManagment databaseConnection)
         {
@@ -15,16 +14,9 @@ namespace ToDoListBackend.Functionality
             _userRepository = new UserRepository(_databaseConnection);
 
         }
-
-        public IEnumerable<Users> GetAllUsers()
-        {
-            return _userRepository.GetAll();
-        }
-
     }
 
     public interface IToDoManagment
     {
-        
     }
 }
