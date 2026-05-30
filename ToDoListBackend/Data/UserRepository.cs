@@ -1,31 +1,30 @@
-﻿using ToDoListBackend.Functionality;
+﻿using ToDoListBackend.Services;
 using ToDoListBackend.Models;
-namespace ToDoListBackend.Repositories
+namespace ToDoListBackend.Data
 {
-    public class UserRepository: Repository
+    public class UserRepository: Repository 
     {
-        private readonly DatabaseManagment db;
-        public UserRepository(DatabaseManagment db)
+        public UserRepository()
         {
-            this.db = db;
         }
-        public override IEnumerable<User> GetAll()
+        public override IEnumerable<User> GetAll(DatabaseManagment db)
         {
             return db.Users.ToList();
         }
-        public override User GetById(int id)
+        public override User GetById(DatabaseManagment db, int id)
         {
-            return new User();
+            User foundUser = db.Users.Find(id);
+            return foundUser;
         }
-        public override bool WriteById(int id)
-        {
-            return true;
-        }
-        public override bool Create(IDataStructure data)
+        public override bool WriteById(DatabaseManagment db, int id)
         {
             return true;
         }
-        public override bool DeleteById(int id)
+        public override bool Create(DatabaseManagment db, IDataStructure data)
+        {
+            return true;
+        }
+        public override bool DeleteById(DatabaseManagment db, int id)
         {
             return true;
         }

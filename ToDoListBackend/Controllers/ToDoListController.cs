@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoListBackend.Functionality;
-
+using ToDoListBackend.Services;
+using ToDoListBackend.Data;
 namespace ToDoListBackend.Controllers
 {
     [Route("[controller]")]
@@ -8,9 +8,10 @@ namespace ToDoListBackend.Controllers
     public class ToDoListController : ControllerBase
     {
         private readonly ToDoManagment _toDoManager;
-        public ToDoListController(ToDoManagment toDoManager)
+
+        public ToDoListController(DatabaseManagment _dbContext)
         {
-            _toDoManager = toDoManager;
+            _toDoManager = new ToDoManagment(_dbContext);
         }
 
         [HttpGet("GetAllUsers")]

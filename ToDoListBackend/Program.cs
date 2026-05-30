@@ -1,6 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
-using ToDoListBackend.Functionality;
+
 
 var builder = WebApplication.CreateBuilder(args);
 //conection string creation
@@ -14,9 +14,8 @@ if (db_server == null || db_port == null || db_database == null ||  db_password 
     conectionString = builder.Configuration.GetConnectionString("Default");
 }
 //builder init
-builder.Services.AddDbContext<DatabaseManagment>(options =>
+builder.Services.AddDbContext<ToDoListBackend.Services.DatabaseManagment>(options =>
         options.UseSqlServer(conectionString));
-builder.Services.AddScoped<IToDoManagment, ToDoManagment>();
 builder.Services.AddControllers();
 //api documentation
 builder.Services.AddOpenApi();
@@ -35,11 +34,10 @@ app.MapControllers();
 // Initialize the database
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseManagment>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ToDoListBackend.Services.DatabaseManagment>();
     // Ensures the database is created and does migrations
     dbContext.Database.Migrate();
-#region Mock Data
-    // if (!dbContext.Boards.Any())
+#region
     // {
     //     // Seed initial data in correct order: create user -> board -> task
     //     var user = new ToDoListBackend.Models.Users(name: "John Doe", email: "test@email.com");

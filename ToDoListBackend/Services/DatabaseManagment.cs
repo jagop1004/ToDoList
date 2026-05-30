@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ToDoListBackend.Functionality
+namespace ToDoListBackend.Services
 {
     public class DatabaseManagment: DbContext
     {

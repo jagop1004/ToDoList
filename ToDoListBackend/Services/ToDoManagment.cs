@@ -1,7 +1,7 @@
 ﻿using ToDoListBackend.Models;
-using ToDoListBackend.Repositories;
+using ToDoListBackend.Data;
 
-namespace ToDoListBackend.Functionality
+namespace ToDoListBackend.Services
 {
     public class ToDoManagment : IToDoManagment
     {
@@ -11,7 +11,7 @@ namespace ToDoListBackend.Functionality
         public ToDoManagment(DatabaseManagment databaseConnection)
         {
             _databaseConnection = databaseConnection;
-            _userRepository = new UserRepository(_databaseConnection);
+            _userRepository = new UserRepository();
 
         }
     }
